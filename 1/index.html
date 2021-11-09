@@ -153,7 +153,7 @@
     class="bottom-left icobutton mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--white"></button>
   <button id="ico3D" onmouseup="switchToViewerMode()"
     class="bottom-left icobutton mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--white"
-    id="switchToViewerBtn" style="display: none;"><i class="material-icons">add</i></button>
+    id="ico3D" style="display: none;"><i class="material-icons">add</i></button>
   <button id="icochange" onmouseup="changeAmbiance()"
     class="top-right icobutton mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--white"></button>
 
@@ -250,7 +250,7 @@
 
       // hide buttons
       document.querySelectorAll('button').forEach((button) => button.style.display = 'none');
-      document.querySelector('#switchToViewerBtn').style.display = 'block';
+      document.querySelector('#ico3D').style.display = 'block';
 
       modelViewer.setAttribute('skybox-image', "");
       ambianceIndex = 0;
@@ -278,7 +278,7 @@
       modelViewer.setAttribute('max-field-of-view', 'auto');
 
       document.querySelectorAll('button').forEach((button) => button.style.display = 'block');
-      document.querySelector('#switchToViewerBtn').style.display = 'none';
+      document.querySelector('#ico3D').style.display = 'none';
 
       // show capsule
       document.querySelector("#theCapsule").style.display = "grid";
