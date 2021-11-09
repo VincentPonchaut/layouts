@@ -1,113 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>&lt;model-viewer&gt; template</title>
-    <meta charset="utf-8" />
-    <meta name="description" content="&lt;model-viewer&gt; template" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link type="text/css" href="./styles.css?v=4" rel="stylesheet" />
-    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
-    <!-- OPTIONAL: The :focus-visible polyfill removes the focus ring for some input types -->
-    <script
-      src="https://unpkg.com/focus-visible@5.0.2/dist/focus-visible.js?v=4"
-      defer
-    ></script>
 
-    <!-- MDL -->
-    <link rel="stylesheet" href="./material.css?v=4">
-    <script src="./material.min.js?v=4"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<head>
+  <title>&lt;model-viewer&gt; template</title>
+  <meta charset="utf-8" />
+  <meta name="description" content="&lt;model-viewer&gt; template" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link type="text/css" href="./styles.css?v=4" rel="stylesheet" />
+  <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+  <!-- OPTIONAL: The :focus-visible polyfill removes the focus ring for some input types -->
+  <script src="https://unpkg.com/focus-visible@5.0.2/dist/focus-visible.js?v=4" defer></script>
 
-    <style>
-      .bottom-right { position: fixed; bottom: 10px; right: 10px; }
-      .bottom-left { position: fixed; bottom: 10px; left: 10px; }
-      .bottom-center { position: fixed; bottom: 10px; left: 50%; transform: translate(-50%, -0px); margin: 0 auto; }
-      .top-right { position: fixed; top: 10px; right: 10px; }
-      .top-left { position: fixed; top: 10px; left: 10px; }
+  <!-- MDL -->
+  <link rel="stylesheet" href="./material.css?v=4">
+  <script src="./material.min.js?v=4"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-      .capsule {
-        width: 101px; 
-        height: 50px; 
-        background-color: white; 
-        display: grid; grid-template-rows: 1; grid-template-columns: 3;
-        border-radius: 30px;
-        /* box-shadow: 0 1px 1.5px 0 rgba(0, 0, 0, 0.12), 0 1px 1px 0 rgba(0, 0, 0, 0.24); */
-      }
-      
-      .boutonPasRond {
-        background-color: transparent;
-        box-shadow: none;
-        border: none;
-        /* border-right: solid 1px #D3D3D3; */
-        width: 50px; height: 50px;
-      }
-      #hotspotBtn::after {
-        content: "";
-        position: absolute;
-        border-right: solid 1px #D3D3D3; 
-        height: 36px;
-        right: 50px;
-        top: 7px;
-      }
+  <style>
+    .bottom-right {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+    }
 
-      #container {
-        margin: 0px auto;
-        position: fixed;
-        top: 0; 
-        left: 0;
-        width: 100%;
-        height: 100%;
-      }
-      #videoElement {
-        width: fit-content;
-        height: 100%;
-        background-color: #666;
-      }
-    </style>
-  </head>
-  <body>
-    <!-- ---------------------------------------------------------------------------------- -->
-    <div id="container">
-      <video autoplay="true" id="videoElement">
-      </video>
-    </div>
-    <model-viewer 
-      id="v" 
-      bounds="tight" 
-      camera-controls 
-      auto-rotate
-      min-field-of-view="10deg"
-      shadow-intensity="0.4" shadow-softness="0.4" 
-      oncontextmenu="return false;" 
-      touch-action="none" 
-      src="scene.gltf">
-    </model-viewer>
+    .bottom-left {
+      position: fixed;
+      bottom: 10px;
+      left: 10px;
+    }
+
+    .bottom-center {
+      position: fixed;
+      bottom: 10px;
+      left: 50%;
+      transform: translate(-50%, -0px);
+      margin: 0 auto;
+    }
+
+    .top-right {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+    }
+
+    .top-left {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+    }
+
+    .capsule {
+      width: 101px;
+      height: 50px;
+      background-color: white;
+      display: grid;
+      grid-template-rows: 1;
+      grid-template-columns: 3;
+      border-radius: 30px;
+      /* box-shadow: 0 1px 1.5px 0 rgba(0, 0, 0, 0.12), 0 1px 1px 0 rgba(0, 0, 0, 0.24); */
+    }
+
+    .boutonPasRond {
+      background-color: transparent;
+      box-shadow: none;
+      border: none;
+      /* border-right: solid 1px #D3D3D3; */
+      width: 50px;
+      height: 50px;
+    }
+
+    #ico3D {
+      background-image: url(icons/3D-viewer.svg);
+    }
+    #icochange {
+      background-image: url(icons/change-envmap.svg);
+    }
+    #icofull {
+      background-image: url(icons/full-screen.svg);
+    }
+    #icomin {
+      background-image: url(icons/min-screen.svg);
+    }
+    #icoposition {
+      background-image: url(icons/position.svg);
+    }
+    #icoreset {
+      background-image: url(icons/reset-position.svg);
+    }
+    #icoswitch {
+      background-image: url(icons/switch-hotspot.svg);
+    }
+    #icovto {
+      background-image: url(icons/vto.svg);
+    }
+    .icobutton {
+      background-repeat: no-repeat;
+      background-position: center center;
+    }
+
+    #icoreset::after {
+      content: "";
+      position: absolute;
+      border-right: solid 1px #D3D3D3;
+      height: 36px;
+      right: 50px;
+      top: 7px;
+    }
+
+    #container {
+      margin: 0px auto;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    #videoElement {
+      width: fit-content;
+      height: 100%;
+      background-color: #666;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ---------------------------------------------------------------------------------- -->
+  <div id="container">
+    <video autoplay="true" id="videoElement">
+    </video>
+  </div>
+  <model-viewer id="v" bounds="tight" camera-controls auto-rotate min-field-of-view="10deg" shadow-intensity="0.4"
+    shadow-softness="0.4" oncontextmenu="return false;" touch-action="none" src="scene.gltf">
+  </model-viewer>
   <div id="vignetteEffect" class="vignette"></div>
   <div style="width: 50px;" class="bottom-right">
     <!-- TODO FULLSCREEN   -->
-    <button onmouseup="toggleFullScreen()" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--white" style="display: block; "><i class="material-icons">add</i></button>
+    <button id="icofull" onmouseup="toggleFullScreen()"
+      class="icobutton mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--white" style="display: block; ">
+    </button>
   </div>
   <div id="theCapsule" class="bottom-center capsule">
-    <button id="hotspotBtn" onmouseup="resetCamera()" class="boutonPasRond" style="display: block; margin-top: 2px; margin-left: 0px; grid-row: 1;"><i class="material-icons">add</i></button>
-    <button onmouseup="changeCameraTarget()" class="boutonPasRond" style="display: block; margin-top: 2px; margin-left: 1px; grid-row: 1;"><i class="material-icons">add</i></button>
+    <button id="icoreset" onmouseup="resetCamera()" class="icobutton boutonPasRond"
+      style="display: block; margin-top: 0px; margin-left: 0px; grid-row: 1;">
+    </button>
+    <button id="icoswitch" onmouseup="changeCameraTarget()" class="icobutton boutonPasRond"
+      style="display: block; margin-top: 0px; margin-left: 1px; grid-row: 1;">
+    </button>
   </div>
-  <!-- <button onmouseup="changeCameraTarget()" class="bottom-right mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--white"><i class="material-icons">add</i></button> -->
-  <button onmouseup="switchToTryOnMode()"  class="bottom-left mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--white"><i class="material-icons">add</i></button>
-  <button onmouseup="switchToViewerMode()" class="bottom-left mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--white" id="switchToViewerBtn" style="display: none;"><i class="material-icons">add</i></button>
-  <button onmouseup="changeAmbiance()" class="top-right mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--white"><i class="material-icons">add</i></button>
-    
-    <!-- ---------------------------------------------------------------------------------- -->
-    <script>
-      let modelViewer = document.querySelector('#v');
-      let initialOrbit
-      let hotspotIndex = 0
-      let ambianceIndex = 0
-      let skyboxAngle = 0;
-      
-      var video = document.querySelector("#videoElement");
-      
-      if (navigator.mediaDevices.getUserMedia) {
-        navigator.mediaDevices.getUserMedia({ video: true })
+  <!-- <button onmouseup="changeCameraTarget()" class="bottom-right icobutton mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--white"><i class="material-icons">add</i></button> -->
+  <button id="icovto" onmouseup="switchToTryOnMode()"
+    class="bottom-left icobutton mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--white"></button>
+  <button id="ico3D" onmouseup="switchToViewerMode()"
+    class="bottom-left icobutton mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--white"
+    id="switchToViewerBtn" style="display: none;"><i class="material-icons">add</i></button>
+  <button id="icochange" onmouseup="changeAmbiance()"
+    class="top-right icobutton mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--white"></button>
+
+  <!-- ---------------------------------------------------------------------------------- -->
+  <script>
+    let modelViewer = document.querySelector('#v');
+    let initialOrbit
+    let hotspotIndex = 0
+    let ambianceIndex = 0
+    let skyboxAngle = 0;
+
+    var video = document.querySelector("#videoElement");
+
+    if (navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices.getUserMedia({ video: true })
         .then(function (stream) {
           video.srcObject = stream;
           video.setAttribute("playsinline", true);
@@ -115,318 +176,318 @@
         })
         .catch(function (err0r) {
           console.log("Something went wrong!");
-        });        
-      }
-      
-      modelViewer.addEventListener('load', (event) => {
-        console.log("loaded");
-      });
+        });
+    }
 
-      function pauseTurntableRotation() {
-        // This pauses turntable rotation
-        modelViewer.dispatchEvent(
-          new CustomEvent("camera-change", {
-            detail: { source: "user-interaction" },
-          })
-        );
-      }
-      function stopTurntableRotation() {
-        modelViewer.autoRotate = false;
-      }
-      function startTurntableRotation() {
-        modelViewer.autoRotate = true;
-      }
-            
-      function changeCameraTarget() {
-        const hotspots = [
-          "1.036162190887431m 0.45048296503005636m -0.010360742858188554m",
-          "0.9145105041420883m 0.07904832035079451m -1.9739225672798495m",
-          "0.1134913113892595m 0.20652078475995328m -0.0484623126430912m"
-        ];
-        
-        modelViewer.setAttribute("camera-target", hotspots[hotspotIndex]);
-        modelViewer.setAttribute("field-of-view", "10deg");
+    modelViewer.addEventListener('load', (event) => {
+      console.log("loaded");
+    });
 
-        pauseTurntableRotation()
+    function pauseTurntableRotation() {
+      // This pauses turntable rotation
+      modelViewer.dispatchEvent(
+        new CustomEvent("camera-change", {
+          detail: { source: "user-interaction" },
+        })
+      );
+    }
+    function stopTurntableRotation() {
+      modelViewer.autoRotate = false;
+    }
+    function startTurntableRotation() {
+      modelViewer.autoRotate = true;
+    }
 
-        ++hotspotIndex;
-        if (hotspotIndex > hotspots.length) {
-          resetCamera()
-        }
-      }
+    function changeCameraTarget() {
+      const hotspots = [
+        "1.036162190887431m 0.45048296503005636m -0.010360742858188554m",
+        "0.9145105041420883m 0.07904832035079451m -1.9739225672798495m",
+        "0.1134913113892595m 0.20652078475995328m -0.0484623126430912m"
+      ];
 
-      function resetCamera() {
-        pauseTurntableRotation()
-        modelViewer.turntableRotation = 0;
-        modelViewer.resetTurntableRotation()
-        // modelViewer.orientation = '0deg 0deg 0deg'
+      modelViewer.setAttribute("camera-target", hotspots[hotspotIndex]);
+      modelViewer.setAttribute("field-of-view", "10deg");
 
-        modelViewer.cameraTarget = "auto auto auto";
-        modelViewer.cameraOrbit = "auto auto auto";
-        modelViewer.setAttribute("field-of-view", "auto");
-        rotateSkybox(180);
-        //modelViewer.cameraOrbit = "180deg 75deg 105%";
-        modelViewer.cameraOrbit = "180rad auto auto";
+      pauseTurntableRotation()
 
-        hotspotIndex = 0;
-      }
-
-      function switchToTryOnMode() {
-        console.log("switching to try on mode")
-        let vignetteObject = document.querySelector("#vignetteEffect");
-
-        // change video size
-        let w = ((video.videoWidth * video.scrollHeight) / video.videoHeight)
-        let offset = (-w/2) + modelViewer.scrollWidth / 2;
-        video.style.position = 'absolute';
-        video.style.width = `${w}px`;
-        video.style.left = `${offset}px`;
-
-        modelViewer.style="background-color: unset;"
-        modelViewer.setAttribute('max-field-of-view', '120deg');
-        if (vignetteObject)
-          vignetteObject.style='display:none;';
-
-        // hide buttons
-        document.querySelectorAll('button').forEach((button) => button.style.display = 'none');
-        document.querySelector('#switchToViewerBtn').style.display = 'block';
-
-        modelViewer.setAttribute('skybox-image', "");
-        ambianceIndex = 0;
-
-        // hide capsule
-        document.querySelector("#theCapsule").style.display = "none";
-
-        // Animate glasses pos & zoom
-        pauseTurntableRotation()
-        stopTurntableRotation()
-        modelViewer.interactionPrompt = "none"
+      ++hotspotIndex;
+      if (hotspotIndex > hotspots.length) {
         resetCamera()
-        let target = modelViewer.getCameraTarget()
-        target.y -= 0.8
-        modelViewer.setAttribute("camera-target", target.toString());
-        modelViewer.setAttribute("field-of-view", "100deg");
-        modelViewer.removeAttribute("camera-controls");
+      }
+    }
+
+    function resetCamera() {
+      pauseTurntableRotation()
+      modelViewer.turntableRotation = 0;
+      modelViewer.resetTurntableRotation()
+      // modelViewer.orientation = '0deg 0deg 0deg'
+
+      modelViewer.cameraTarget = "auto auto auto";
+      modelViewer.cameraOrbit = "auto auto auto";
+      modelViewer.setAttribute("field-of-view", "auto");
+      rotateSkybox(180);
+      //modelViewer.cameraOrbit = "180deg 75deg 105%";
+      modelViewer.cameraOrbit = "180rad auto auto";
+
+      hotspotIndex = 0;
+    }
+
+    function switchToTryOnMode() {
+      console.log("switching to try on mode")
+      let vignetteObject = document.querySelector("#vignetteEffect");
+
+      // change video size
+      let w = ((video.videoWidth * video.scrollHeight) / video.videoHeight)
+      let offset = (-w / 2) + modelViewer.scrollWidth / 2;
+      video.style.position = 'absolute';
+      video.style.width = `${w}px`;
+      video.style.left = `${offset}px`;
+
+      modelViewer.style = "background-color: unset;"
+      modelViewer.setAttribute('max-field-of-view', '120deg');
+      if (vignetteObject)
+        vignetteObject.style = 'display:none;';
+
+      // hide buttons
+      document.querySelectorAll('button').forEach((button) => button.style.display = 'none');
+      document.querySelector('#switchToViewerBtn').style.display = 'block';
+
+      modelViewer.setAttribute('skybox-image', "");
+      ambianceIndex = 0;
+
+      // hide capsule
+      document.querySelector("#theCapsule").style.display = "none";
+
+      // Animate glasses pos & zoom
+      pauseTurntableRotation()
+      stopTurntableRotation()
+      modelViewer.interactionPrompt = "none"
+      resetCamera()
+      let target = modelViewer.getCameraTarget()
+      target.y -= 0.8
+      modelViewer.setAttribute("camera-target", target.toString());
+      modelViewer.setAttribute("field-of-view", "100deg");
+      modelViewer.removeAttribute("camera-controls");
+    }
+
+    function switchToViewerMode() {
+      console.log("switching to viewer mode")
+
+      document.querySelector("#vignetteEffect").style.display = 'block';
+      modelViewer.style = "background-color: #ffffff;"
+      modelViewer.setAttribute('max-field-of-view', 'auto');
+
+      document.querySelectorAll('button').forEach((button) => button.style.display = 'block');
+      document.querySelector('#switchToViewerBtn').style.display = 'none';
+
+      // show capsule
+      document.querySelector("#theCapsule").style.display = "grid";
+
+      ambianceIndex = 0;
+
+      pauseTurntableRotation()
+      startTurntableRotation()
+      modelViewer.interactionPrompt = "auto"
+      resetCamera()
+      // let target = modelViewer.getCameraTarget()
+      // target.y += 0.8
+      // modelViewer.setAttribute("camera-target", target.toString());
+      // modelViewer.setAttribute("field-of-view", "90deg");
+      modelViewer.setAttribute("camera-controls", "");
+
+      // rotateSkybox(180);
+    }
+
+    function rotateSkybox(delta) {
+      console.log("skyboxAngle", skyboxAngle, delta)
+      const orbit = modelViewer.getCameraOrbit();
+      orbit.theta = delta;
+      modelViewer.cameraOrbit = orbit.toString();
+      modelViewer.resetTurntableRotation(delta);
+
+      if (skyboxAngle !== delta) {
+        modelViewer.jumpCameraToGoal();
+        skyboxAngle = delta
       }
 
-      function switchToViewerMode() {
-        console.log("switching to viewer mode")
+      // if (skyboxAngle === delta)
+      //   return
+      // skyboxAngle = delta;
+      // const orbit = modelViewer.getCameraOrbit();
+      // orbit.theta = delta;
+      // modelViewer.cameraOrbit = orbit.toString();
+      // modelViewer.resetTurntableRotation(skyboxAngle);
+      // modelViewer.jumpCameraToGoal();
+    }
 
-        document.querySelector("#vignetteEffect").style.display = 'block';
-        modelViewer.style="background-color: #ffffff;"
-        modelViewer.setAttribute('max-field-of-view', 'auto');
+    function changeAmbiance() {
+      const ambiances = [
+        "./envmap1.hdr",
+        "./envmap2.hdr",
+        "./envmap3.hdr",
+        ""
+      ];
 
-        document.querySelectorAll('button').forEach((button) => button.style.display = 'block');
-        document.querySelector('#switchToViewerBtn').style.display = 'none';
+      if (!modelViewer)
+        modelViewer = document.querySelector('#v');
 
-        // show capsule
-        document.querySelector("#theCapsule").style.display = "grid";
+      // const orbit = modelViewer.getCameraOrbit();
+      // orbit.theta += 3.1415;
+      // modelViewer.cameraOrbit = orbit.toString();
+      // modelViewer.resetTurntableRotation(180);
+      // modelViewer.jumpCameraToGoal();
 
-        ambianceIndex = 0;
+      modelViewer.autoRotate = (ambianceIndex == ambiances.length - 1);
 
-        pauseTurntableRotation()
-        startTurntableRotation()
-        modelViewer.interactionPrompt = "auto"
-        resetCamera()
-        // let target = modelViewer.getCameraTarget()
-        // target.y += 0.8
-        // modelViewer.setAttribute("camera-target", target.toString());
-        // modelViewer.setAttribute("field-of-view", "90deg");
-        modelViewer.setAttribute("camera-controls", "");
+      modelViewer.setAttribute("skybox-image", ambiances[ambianceIndex]);
+      ++ambianceIndex;
 
-        // rotateSkybox(180);
+      if (ambianceIndex > ambiances.length - 1) {
+        ambianceIndex = 0
       }
+    }
 
-      function rotateSkybox(delta) {
-        console.log("skyboxAngle", skyboxAngle, delta)
-        const orbit = modelViewer.getCameraOrbit();
-        orbit.theta = delta;
-        modelViewer.cameraOrbit = orbit.toString();
-        modelViewer.resetTurntableRotation(delta);
-        
-        if (skyboxAngle !== delta) {
-          modelViewer.jumpCameraToGoal();
-          skyboxAngle = delta
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
         }
-        
-        // if (skyboxAngle === delta)
-        //   return
-        // skyboxAngle = delta;
-        // const orbit = modelViewer.getCameraOrbit();
-        // orbit.theta = delta;
-        // modelViewer.cameraOrbit = orbit.toString();
-        // modelViewer.resetTurntableRotation(skyboxAngle);
-        // modelViewer.jumpCameraToGoal();
       }
+    }
 
-      function changeAmbiance() {
-        const ambiances = [
-          "./envmap1.hdr",
-          "./envmap2.hdr",
-          "./envmap3.hdr",
-          ""
-        ];
+  </script>
+  <script type="module">
+    const modelViewer = document.querySelector("#v");
+    const tapDistance = 2;
+    let panning = false;
+    let panX, panY;
+    let startX, startY;
+    let lastX, lastY;
+    let metersPerPixel;
 
-        if (!modelViewer)
-          modelViewer = document.querySelector('#v');
-
-        // const orbit = modelViewer.getCameraOrbit();
-        // orbit.theta += 3.1415;
-        // modelViewer.cameraOrbit = orbit.toString();
-        // modelViewer.resetTurntableRotation(180);
-        // modelViewer.jumpCameraToGoal();
-        
-        modelViewer.autoRotate = (ambianceIndex == ambiances.length - 1);
-
-        modelViewer.setAttribute("skybox-image", ambiances[ambianceIndex]);
-        ++ambianceIndex;
-
-        if (ambianceIndex > ambiances.length - 1) {
-          ambianceIndex = 0
-        }
-      }
-
-      function toggleFullScreen() {
-        if (!document.fullscreenElement) {
-            document.documentElement.requestFullscreen();
-        } else {
-          if (document.exitFullscreen) {
-            document.exitFullscreen();
-          }
-        }
-      }
-
-    </script>
-    <script type="module">
-      const modelViewer = document.querySelector("#v");
-      const tapDistance = 2;
-      let panning = false;
-      let panX, panY;
-      let startX, startY;
-      let lastX, lastY;
-      let metersPerPixel;
-      
-      const startPan = () => {
-        const orbit = modelViewer.getCameraOrbit();
-        const { theta, phi, radius } = orbit;
-        const psi = theta - modelViewer.turntableRotation;
-        metersPerPixel =
+    const startPan = () => {
+      const orbit = modelViewer.getCameraOrbit();
+      const { theta, phi, radius } = orbit;
+      const psi = theta - modelViewer.turntableRotation;
+      metersPerPixel =
         (0.75 * radius) / modelViewer.getBoundingClientRect().height;
-        panX = [-Math.cos(psi), 0, Math.sin(psi)];
-        panY = [
-          -Math.cos(phi) * Math.sin(psi),
-          Math.sin(phi),
-          -Math.cos(phi) * Math.cos(psi),
-        ];
-        modelViewer.interactionPrompt = "none";
-      };
-      
-      const movePan = (thisX, thisY) => {
-        const dx = (thisX - lastX) * metersPerPixel;
-        const dy = (thisY - lastY) * metersPerPixel;
-        lastX = thisX;
-        lastY = thisY;
-        
-        const target = modelViewer.getCameraTarget();
-        target.x += dx * panX[0] + dy * panY[0];
-        target.y += dx * panX[1] + dy * panY[1];
-        target.z += dx * panX[2] + dy * panY[2];
-        modelViewer.cameraTarget = `${target.x}m ${target.y}m ${target.z}m`;
+      panX = [-Math.cos(psi), 0, Math.sin(psi)];
+      panY = [
+        -Math.cos(phi) * Math.sin(psi),
+        Math.sin(phi),
+        -Math.cos(phi) * Math.cos(psi),
+      ];
+      modelViewer.interactionPrompt = "none";
+    };
 
-        // This pauses turntable rotation
-        modelViewer.dispatchEvent(
-          new CustomEvent("camera-change", {
-            detail: { source: "user-interaction" },
-          })
-        );
-      };
+    const movePan = (thisX, thisY) => {
+      const dx = (thisX - lastX) * metersPerPixel;
+      const dy = (thisY - lastY) * metersPerPixel;
+      lastX = thisX;
+      lastY = thisY;
 
-      const recenter = (pointer) => {
-        panning = false;
-        if (
-          Math.abs(pointer.clientX - startX) > tapDistance ||
-          Math.abs(pointer.clientY - startY) > tapDistance
-        )
-          return;
-        const hit = modelViewer.positionAndNormalFromPoint(
-          pointer.clientX,
-          pointer.clientY
-        );
-        modelViewer.cameraTarget =
-          hit == null ? "auto auto auto" : hit.position.toString();
-      };
+      const target = modelViewer.getCameraTarget();
+      target.x += dx * panX[0] + dy * panY[0];
+      target.y += dx * panX[1] + dy * panY[1];
+      target.z += dx * panX[2] + dy * panY[2];
+      modelViewer.cameraTarget = `${target.x}m ${target.y}m ${target.z}m`;
 
-      modelViewer.addEventListener(
-        "mousedown",
-        (event) => {
-          startX = event.clientX;
-          startY = event.clientY;
-          panning =
-            event.button === 2 ||
-            event.ctrlKey ||
-            event.metaKey ||
-            event.shiftKey;
-          if (!panning) return;
-
-          lastX = startX;
-          lastY = startY;
-          startPan();
-          event.stopPropagation();
-        },
-        true
+      // This pauses turntable rotation
+      modelViewer.dispatchEvent(
+        new CustomEvent("camera-change", {
+          detail: { source: "user-interaction" },
+        })
       );
+    };
 
-      modelViewer.addEventListener(
-        "touchstart",
-        (event) => {
-          const { targetTouches, touches } = event;
-          startX = targetTouches[0].clientX;
-          startY = targetTouches[0].clientY;
-          panning =
-            targetTouches.length === 2 &&
-            targetTouches.length === touches.length;
-          if (!panning) return;
-
-          lastX = 0.5 * (targetTouches[0].clientX + targetTouches[1].clientX);
-          lastY = 0.5 * (targetTouches[0].clientY + targetTouches[1].clientY);
-          startPan();
-        },
-        true
+    const recenter = (pointer) => {
+      panning = false;
+      if (
+        Math.abs(pointer.clientX - startX) > tapDistance ||
+        Math.abs(pointer.clientY - startY) > tapDistance
+      )
+        return;
+      const hit = modelViewer.positionAndNormalFromPoint(
+        pointer.clientX,
+        pointer.clientY
       );
+      modelViewer.cameraTarget =
+        hit == null ? "auto auto auto" : hit.position.toString();
+    };
 
-      self.addEventListener(
-        "mousemove",
-        (event) => {
-          if (!panning) return;
+    modelViewer.addEventListener(
+      "mousedown",
+      (event) => {
+        startX = event.clientX;
+        startY = event.clientY;
+        panning =
+          event.button === 2 ||
+          event.ctrlKey ||
+          event.metaKey ||
+          event.shiftKey;
+        if (!panning) return;
 
-          movePan(event.clientX, event.clientY);
-          event.stopPropagation();
-        },
-        true
-      );
+        lastX = startX;
+        lastY = startY;
+        startPan();
+        event.stopPropagation();
+      },
+      true
+    );
 
-      modelViewer.addEventListener(
-        "touchmove",
-        (event) => {
-          if (!panning || event.targetTouches.length !== 2) return;
+    modelViewer.addEventListener(
+      "touchstart",
+      (event) => {
+        const { targetTouches, touches } = event;
+        startX = targetTouches[0].clientX;
+        startY = targetTouches[0].clientY;
+        panning =
+          targetTouches.length === 2 &&
+          targetTouches.length === touches.length;
+        if (!panning) return;
 
-          const { targetTouches } = event;
-          const thisX =
-            0.5 * (targetTouches[0].clientX + targetTouches[1].clientX);
-          const thisY =
-            0.5 * (targetTouches[0].clientY + targetTouches[1].clientY);
-          movePan(thisX, thisY);
-        },
-        true
-      );
+        lastX = 0.5 * (targetTouches[0].clientX + targetTouches[1].clientX);
+        lastY = 0.5 * (targetTouches[0].clientY + targetTouches[1].clientY);
+        startPan();
+      },
+      true
+    );
 
-      self.addEventListener(
-        "mouseup",
-        (event) => {
-          // recenter(event);
-        },
-        true
-      );
+    self.addEventListener(
+      "mousemove",
+      (event) => {
+        if (!panning) return;
+
+        movePan(event.clientX, event.clientY);
+        event.stopPropagation();
+      },
+      true
+    );
+
+    modelViewer.addEventListener(
+      "touchmove",
+      (event) => {
+        if (!panning || event.targetTouches.length !== 2) return;
+
+        const { targetTouches } = event;
+        const thisX =
+          0.5 * (targetTouches[0].clientX + targetTouches[1].clientX);
+        const thisY =
+          0.5 * (targetTouches[0].clientY + targetTouches[1].clientY);
+        movePan(thisX, thisY);
+      },
+      true
+    );
+
+    self.addEventListener(
+      "mouseup",
+      (event) => {
+        // recenter(event);
+      },
+      true
+    );
 
       // modelViewer.addEventListener(
       //   "touchend",
@@ -441,12 +502,10 @@
       //   },
       //   true
       // );
-    </script>
-    <script src="script.js?v=4"></script>
-    <!-- Loads <model-viewer> for browsers: -->
-    <script
-      type="module"
-      src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js?v=4"
-    ></script>
-  </body>
+  </script>
+  <script src="script.js?v=4"></script>
+  <!-- Loads <model-viewer> for browsers: -->
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js?v=4"></script>
+</body>
+
 </html>
