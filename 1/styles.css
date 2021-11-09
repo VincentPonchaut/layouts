@@ -115,7 +115,7 @@ model-viewer[ar-status="session-started"] > #ar-prompt {
 model-viewer > #ar-prompt > img {
   animation: circle 4s linear infinite;
 }
-
+/* 
 .vignette {
   position: fixed;
   top: 0;
@@ -123,5 +123,14 @@ model-viewer > #ar-prompt > img {
   width: 150%;
   height: 100%;
   box-shadow: 0 0 200px rgba(0,0,0, 0.4) inset;
+  pointer-events: none;
+} */
+.vignette {
+  position: absolute;
+  top: 0;
+  left: -20%;
+  width: 140%;
+  height: 100%;
+  box-shadow: 0 0 200px rgb(0 0 0 / 40%) inset;
   pointer-events: none;
 }
