@@ -17,9 +17,6 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
   <style>
-    html {
-        height: 100%;
-    }
     .bottom-right {
       position: fixed;
       bottom: 10px;
@@ -135,7 +132,7 @@
   </div>
   <model-viewer id="v" bounds="tight" camera-controls auto-rotate min-field-of-view="10deg" shadow-intensity="0.4"
     shadow-softness="0.4" oncontextmenu="return false;" touch-action="none" src="scene.gltf">
-    <div id="vignetteEffect" class="vignette"></div>
+    <div id="vignetteEffect" class="vignette" style="height: 100vh;"></div>
   </model-viewer>
   <div style="width: 50px;" class="bottom-right">
     <!-- TODO FULLSCREEN   -->
